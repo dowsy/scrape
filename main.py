@@ -59,7 +59,7 @@ for j in playerList:
     summation = sum(totalpts)
     playerCappts.append(summation)
 
-title = ["FPL",'91225', '91449', '92236', '92611', '105045', '1164477', '1505241']
+title = ["FPL",'TT Chan', 'shing chow', 'Jeffrey Wong', 'CHAN JOHN', 'Adrian Lam', 'James Chan', 'Jeffrey Kong']
 visual.append(title)
 visual.append(playerTotalpts)
 visual.append(playerBenchpts)
