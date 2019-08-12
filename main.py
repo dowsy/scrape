@@ -59,17 +59,27 @@ for j in playerList:
     summation = sum(totalpts)
     playerCappts.append(summation)
 
-visual.append(["FPL",'91225', '91449', '92236', '92611', '105045', '1164477', '1505241'])
+title = ["FPL",'91225', '91449', '92236', '92611', '105045', '1164477', '1505241']
+visual.append(title)
 visual.append(playerTotalpts)
 visual.append(playerBenchpts)
 visual.append(playerDFpts)
 visual.append(playerMFpts)
 visual.append(playerFWpts)
 visual.append(playerCappts)
+matr = [title, playerTotalpts, playerBenchpts, playerDFpts, playerMFpts, playerFWpts, playerCappts]
 
-finalvisual = [visual]
+visualb = []
+
+for i in range(0,len(title)):
+    lista = []
+    for j in range (0,len(matr)):
+        lista.append(visual[j][i])
+    visualb.append(lista)
+
+finalvisual = [visualb]
+print(finalvisual)
 
 with open("data_file.json", "w") as write_file:
     json.dump(finalvisual, write_file)
-
 
