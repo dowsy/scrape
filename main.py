@@ -5,7 +5,7 @@ with urllib.request.urlopen("https://dowsy.github.io/FPLMiniLeague/data_file.jso
     data = u.read()
     data = json.loads(data)
 
-currGW = 29
+currGW = 38
 
 gameWeeks = []
 for i in range (1,39):
