@@ -103,9 +103,27 @@ for i in playerList:
     monthPoints.append(ptsOfMonth)
     monthVisual.append(monthPoints)
 
-
 print(monthVisual)
+
+cum18Header = ['2018/19']
+for i in range(1,39):
+    cum18Header.append(str(i))
+cum1819 = [cum18Header]
+
+for i in playerList:
+    cumPoints = [i]
+    for j in range(0+1,currGW+1):
+        cumCal = []
+        for k in range (0,j):
+            cumCal.append(data[gameWeeks[k]][i]['game week points'])
+        cumWeek = sum(cumCal)
+        cumPoints.append(cumWeek)
+    cum1819.append(cumPoints)
+
+print(cum1819)
 
 with open("data_file.json", "w") as write_file:
     json.dump([mainvisual,monthVisual], write_file)
 
+with open("ranking_file.json", "w") as write_file:
+    json.dump([cum1819], write_file)
