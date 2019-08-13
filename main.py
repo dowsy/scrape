@@ -122,7 +122,6 @@ for i in playerList:
 
 print(cum1819)
 
-
 with open("data_file.json", "w") as write_file:
     json.dump([mainvisual,monthVisual], write_file)
 
