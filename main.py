@@ -5,6 +5,8 @@ with urllib.request.urlopen("https://dowsy.github.io/FPLMiniLeague/data_file.jso
     data = u.read()
     data = json.loads(data)
 
+currGW = 29
+
 gameWeeks = []
 for i in range (1,39):
     gameWeeks.append(str(i))
@@ -59,27 +61,51 @@ for j in playerList:
     summation = sum(totalpts)
     playerCappts.append(summation)
 
-title = ["FPL",'TT Chan', 'shing chow', 'Jeffrey Wong', 'CHAN JOHN', 'Adrian Lam', 'James Chan', 'Jeffrey Kong']
-visual.append(title)
-visual.append(playerTotalpts)
-visual.append(playerBenchpts)
-visual.append(playerDFpts)
-visual.append(playerMFpts)
-visual.append(playerFWpts)
-visual.append(playerCappts)
+title = ["Main Scores",'TT Chan', 'shing chow', 'Jeffrey Wong', 'CHAN JOHN', 'Adrian Lam', 'James Chan', 'Jeffrey Kong']
 matr = [title, playerTotalpts, playerBenchpts, playerDFpts, playerMFpts, playerFWpts, playerCappts]
+for i in matr:
+    visual.append(i)
 
-visualb = []
+mainvisual = []
 
 for i in range(0,len(title)):
     lista = []
     for j in range (0,len(matr)):
         lista.append(visual[j][i])
-    visualb.append(lista)
+    mainvisual.append(lista)
 
-finalvisual = [visualb]
-print(finalvisual)
+print(mainvisual)
+
+monthHeader = ['Manager of the Month']
+months = ['August', 'September', 'October', 'November', 'December', 'January', 'February', 'March', 'April', 'May']
+monthLimit = [0, 4, 7, 10, 14, 20, 24, 28, 31, 35, 38]
+for i in range(0, len(months)):
+    if (currGW > monthLimit[i]) and (currGW <= monthLimit[i+1]):
+        currMonth = months[i]
+        monthIndex = i
+        for j in range(0,i+1):
+            monthHeader.append(months[j])
+
+monthVisual = [monthHeader]
+
+for i in playerList:
+    monthPoints = [i]
+    for j in range(0,monthIndex):
+        weeksOfMonth = []
+        for k in range(monthLimit[j], monthLimit[j+1]):
+            weeksOfMonth.append(data[gameWeeks[k]][i]['game week points'])
+            ptsOfMonth = sum(weeksOfMonth)
+        monthPoints.append(ptsOfMonth)
+        weeksOfMonth = []
+    for l in range(monthLimit[monthIndex],currGW):
+        weeksOfMonth.append(data[gameWeeks[l]][i]['game week points'])
+        ptsOfMonth = sum(weeksOfMonth)
+    monthPoints.append(ptsOfMonth)
+    monthVisual.append(monthPoints)
+
+
+print(monthVisual)
 
 with open("data_file.json", "w") as write_file:
-    json.dump(finalvisual, write_file)
+    json.dump([mainvisual,monthVisual], write_file)
 
