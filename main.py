@@ -122,7 +122,10 @@ for i in playerList:
 
 print(cum1819)
 
-rank1819 = cum1819
+with open("cum_file.json", "w") as write_file:
+    json.dump([cum1819], write_file)
+
+rank1819 = cum1819[:]
 rankDraft = []
 
 for i in range(0, currGW+1):
@@ -134,15 +137,12 @@ for i in range(0, currGW+1):
 
 for i in range(1,8):
     for j in range(1, currGW+1):
-        rank1819[i][j] = (rankDraft[j].index(cum1819[i][j]))+1
+        rank1819[i][j] = (rankDraft[j].index(rank1819[i][j]))+1
 
 print(rank1819)
 
 with open("data_file.json", "w") as write_file:
     json.dump([mainvisual,monthVisual], write_file)
-
-with open("cum_file.json", "w") as write_file:
-    json.dump([cum1819], write_file)
 
 with open("ranking_file.json", "w") as write_file:
     json.dump([rank1819], write_file)
